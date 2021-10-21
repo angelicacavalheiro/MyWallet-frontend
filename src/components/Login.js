@@ -12,7 +12,7 @@ export default function Login(){
     
     function requestLogin(event) {    
         setLoading(true)
-        history.push('/') //só pra testar    
+        history.push('/transactions') //só pra testar    
         event.preventDefault(); // impede o redirecionamento        
     }
 
