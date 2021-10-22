@@ -1,5 +1,7 @@
 import "./reset.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import UserContext from './contexts/UserContext';
+import { useState } from 'react';
 import Login from "./components/Login"
 import Register from "./components/Register";
 import TransactionList from "./components/TransactionList"
@@ -7,9 +9,14 @@ import NewTransaction from "./components/NewTransaction";
 
 function App() {  
 
+  const [user, setUser] = useState(null)
+  const [transactionType, setTransactionType] = useState(false)
+
   return (
     <BrowserRouter> 
       <Switch>
+
+      <UserContext.Provider value={{user, setUser, transactionType, setTransactionType}}>
 
         <Route path="/" exact>
           <Login />
@@ -25,7 +32,9 @@ function App() {
 
         <Route path="/newTransaction" exact>
           <NewTransaction />
-        </ Route>     
+        </ Route>  
+
+      </UserContext.Provider>   
 
       </ Switch>       
     </ BrowserRouter>   

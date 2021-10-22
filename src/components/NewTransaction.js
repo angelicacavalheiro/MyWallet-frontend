@@ -1,29 +1,68 @@
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import UserContext from '.././contexts/UserContext';
 import Loader from "react-loader-spinner";
+import axios from "axios"
 
 export default function NewTransaction(){
 
-
-    const[value, setValue] = useState("")
+    const {user, transactionType, setTransactionType} = useContext(UserContext);
+    const[value, setValue] = useState()
     const[description, setDescription] = useState("")
     const[loading, setLoading] = useState(false)
+    const[moviments, setMoviments] = useState("")
     const history = useHistory()
+    let input, output = false
+
 
     function requestTransaction(event) {    
-        setLoading(true)
-        history.push('/transactions') //só pra testar    
-        event.preventDefault(); // impede o redirecionamento        
-    }
 
+        event.preventDefault();
+
+        setLoading(true)
+
+        if (transactionType == "input"){
+            input = true
+            output = false
+        } else {
+            input = false
+            output = true
+        }
+        console.log(input)
+        console.log(output)
+       
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${user.token}`
+            }
+        }
+
+        const body = {valor: value, entrada: input, saida: output, descricao: description}
+    
+        axios.post('http://localhost:4000/movimento', body, config)
+        .then(res => {
+            setMoviments(res.data)
+            console.log(moviments)
+            setLoading(false)
+
+            // setValue(0)
+            // setDescription("")
+            // setLoading(false)
+            // history.push('/transactions')
+        })  
+        .catch(err => {
+            setLoading(false)
+            console.log(err)        
+        })
+    }
+    
     return(
         <Container>
         <Title> Nova entrada </Title>
-
         <form onSubmit={requestTransaction}>
-
-            <input type="number" value="input" required placeholder="value" 
+            <input type="number" value="input" required placeholder="Valor" 
             value={value} onChange={(e) => setValue(e.target.value)}/>
 
             <input type="text" description="input" placeholder="Descrição" 
@@ -32,10 +71,7 @@ export default function NewTransaction(){
             {(loading === true) ? 
             <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
              : <button onClick={requestTransaction}> Salvar entrada </button>}
-
-        </form>        
-        
-        
+        </form>               
     </Container>
     )
 }

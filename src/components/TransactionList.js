@@ -1,25 +1,49 @@
 import styled from 'styled-components';
 import { Link, useHistory } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import UserContext from '.././contexts/UserContext';
+import axios from "axios"
 
 
 export default function TransactionList(){
 
     const history = useHistory()
+    const {user, transactionType, setTransactionType} = useContext(UserContext);
+    const [moviments, setMoviments] = useState("carregando...");
 
-    function redirectToNewTransaction() {            
+    function redirectToNewTransaction(event) {  
+        
+        setTransactionType(event)
+        //console.log(transactionType)                  
         history.push('/newTransaction') //só pra testar           
     }
+
+    useEffect(() => {
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${user.token}`
+            }
+        }
+
+        axios.get('http://localhost:4000/movimento', config)
+        .then(res => {
+            setMoviments(res.data)
+            //console.log(moviments)
+            //se vir alguma coisa coloca o que veio, atraves de um map na hora de renderizar, 
+            //se não setMoviments ganha a mensagem que queremos mostrar nesse caso
+        })  
+    } , []);
 
     return(
         <Container>
         <Title> Olá, fulano </Title>
 
-        <ShowTransactions>Não há registros de entrada ou saída</ShowTransactions>            
+        <ShowTransactions> Não há registros de entrada ou saída</ShowTransactions>            
 
         <Options>
-            <button onClick={redirectToNewTransaction}> + Nova Entrada </button>
-            <button onClick={redirectToNewTransaction}> - Nova Saída </button>
+            <button onClick={() => redirectToNewTransaction("input")}> + Nova Entrada </button>
+            <button onClick={() => redirectToNewTransaction("output")}> - Nova Saída </button>
         </Options>
         
         

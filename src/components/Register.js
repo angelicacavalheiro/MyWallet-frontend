@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link, useHistory } from "react-router-dom";
 import { useState } from 'react';
 import Loader from "react-loader-spinner";
+import axios from "axios"
 
 export default function Register(){
 
@@ -15,7 +16,29 @@ export default function Register(){
     function requestRegistration(event) {    
         setLoading(true)
         history.push('/register') //só pra testar    
-        event.preventDefault(); // impede o redirecionamento        
+        event.preventDefault(); // impede o redirecionamento   
+
+        
+        const body = {
+            nome: name,
+            email,
+            senha: password,
+            confirma_senha: confirmPassword
+        }
+        console.log(body)
+
+        axios.post('http://localhost:4000/sign-up', body)
+        .then(res => {
+            setLoading(false)
+            console.log(res.data)
+            history.push('/')
+        })
+
+        .catch(err => {
+            setLoading(false)
+            console.log(err)
+            alert("tente novamente")
+    })
     }
 
     return(

@@ -1,19 +1,37 @@
 import styled from 'styled-components';
 import { Link, useHistory } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import UserContext from '.././contexts/UserContext';
 import Loader from "react-loader-spinner";
+import axios from "axios"
 
 export default function Login(){
 
+    const {user, setUser} = useContext(UserContext);
     const[email, setEmail] = useState("")
     const[password, setPassword] = useState("")
     const[loading, setLoading] = useState(false)
     const history = useHistory()
     
     function requestLogin(event) {    
-        setLoading(true)
-        history.push('/transactions') //só pra testar    
-        event.preventDefault(); // impede o redirecionamento        
+        setLoading(true)  
+        event.preventDefault(); // impede o redirecionamento   
+
+        const body = {email, senha: password}
+
+        axios.post('http://localhost:4000/sign-in', body)
+        .then(res => {
+            console.log(res.data)
+            setUser(res.data)           
+            history.push('/transactions')
+            setLoading(false)                                 
+        })
+
+        .catch(err => {
+            setLoading(false)
+            console.log(err)        
+            alert("tente novamente")
+        })
     }
 
     return(
