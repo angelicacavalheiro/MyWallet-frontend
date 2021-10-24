@@ -3,18 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from 'react';
 import UserContext from '.././contexts/UserContext';
 import axios from "axios"
+import Balance from './Balance';
 
 
 export default function TransactionList(){
 
     const history = useHistory()
-    const {user, transactionType, setTransactionType} = useContext(UserContext);
-    const [moviments, setMoviments] = useState("carregando...");
+    const {user, setTransactionType} = useContext(UserContext);
 
-    function redirectToNewTransaction(event) {  
-        
-        setTransactionType(event)
-        //console.log(transactionType)                  
+    const [moviments, setMoviments] = useState(null)
+
+    function redirectToNewTransaction(event) {         
+        setTransactionType(event)                 
         history.push('/newTransaction') //só pra testar           
     }
 
@@ -29,26 +29,39 @@ export default function TransactionList(){
         axios.get('http://localhost:4000/movimento', config)
         .then(res => {
             setMoviments(res.data)
-            //console.log(moviments)
-            //se vir alguma coisa coloca o que veio, atraves de um map na hora de renderizar, 
-            //se não setMoviments ganha a mensagem que queremos mostrar nesse caso
         })  
     } , []);
 
+
     return(
         <Container>
-        <Title> Olá, fulano </Title>
+            <Title> Olá, fulano</Title>    
 
-        <ShowTransactions> Não há registros de entrada ou saída</ShowTransactions>            
+            {
+                 moviments == null || moviments.length == 0
+                 ?
+                 <NoTransactions>Não há registros de entrada ou saída</NoTransactions>                 
+                 :
+                 (
+                    <ShowTransactions>
+                    {moviments.reverse().map((moviment) => (                
+                        <div style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>                       
+                            <h1>{moviment.data}</h1>  
+                            <h2>{moviment.descricao}</h2>              
+                            <h3>{moviment.valor}</h3>                                                    
+                        </div>                
+                    ))}
+                        <Balance/>
+                    </ShowTransactions> 
+                 )
+            }            
 
-        <Options>
-            <button onClick={() => redirectToNewTransaction("input")}> + Nova Entrada </button>
-            <button onClick={() => redirectToNewTransaction("output")}> - Nova Saída </button>
-        </Options>
-        
-        
-    </Container>
-    )
+            <Options>
+                <button onClick={() => redirectToNewTransaction("input")}> + Nova Entrada </button>
+                <button onClick={() => redirectToNewTransaction("output")}> - Nova Saída </button>
+            </Options>                
+        </Container>
+    )   
 }
 
 const Container = styled.div`
@@ -56,8 +69,7 @@ const Container = styled.div`
     flex-direction: column;	
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;    
-	
+    background: #8C11BE;   	
 	p {
         font-family: Raleway;
         font-weight: bold;
@@ -81,8 +93,24 @@ const Container = styled.div`
         line-height: 23px;
         color: #FFFFFF;
 
-    }
+    }    
+`;
+
+const NoTransactions = styled.div`
+    width: 326px;
+    height: 446px;
+    background: #FFFFFF;
+    border-radius: 5px;   
+    margin: 0 auto 13px auto;
     
+    font-family: Raleway;
+    font-size: 20px;
+    line-height: 23px;
+    color: #868686;
+    display:flex;
+    padding: 200px 72px 200px 73px;
+    align-items: center;   
+    text-align: center;
 `;
 
 const ShowTransactions = styled.div`
@@ -91,14 +119,41 @@ const ShowTransactions = styled.div`
     background: #FFFFFF;
     border-radius: 5px;   
     margin: 0 auto 13px auto;
+    overflow-y: scroll;
+    
+    &::-webkit-scrollbar {
+    width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+    background: #C6C6C6;
+    border-radius: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+    background-color: #8C11BE;
+    border-radius: 5px;
+    }
+    h1{
+        color: #C6C6C6;
+        width: 60px;
+    }   
+    h2{
+        color: #000000;
+        width: 175px;
+    }
+    h3{    
+        width: 72px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    div{
+        display: flex;
+        height: 24px;
+        width: 307px;
+        margin: 23px auto 0 auto;       
+        font-family: Raleway;
+        font-size: 16px;
+    }
 
-    font-family: Raleway;
-    font-size: 20px;
-    line-height: 23px;
-    color: #868686;
-    display:flex;
-    padding: 200px 72px 200px 73px;
-    align-items: center;
 `;
 
 const Options = styled.div `
@@ -110,7 +165,7 @@ const Options = styled.div `
 
 const Title = styled.div`
     height: 50px;
-    margin: 28px auto 22px 24px;
+    margin: 28px auto 22px 45px;
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;

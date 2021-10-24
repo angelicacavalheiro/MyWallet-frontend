@@ -7,11 +7,10 @@ import axios from "axios"
 
 export default function NewTransaction(){
 
-    const {user, transactionType, setTransactionType} = useContext(UserContext);
+    const {user, transactionType} = useContext(UserContext);
     const[value, setValue] = useState()
     const[description, setDescription] = useState("")
     const[loading, setLoading] = useState(false)
-    const[moviments, setMoviments] = useState("")
     const history = useHistory()
     let input, output = false
 
@@ -28,10 +27,7 @@ export default function NewTransaction(){
         } else {
             input = false
             output = true
-        }
-        console.log(input)
-        console.log(output)
-       
+        }       
 
         const config = {
             headers:{
@@ -43,14 +39,8 @@ export default function NewTransaction(){
     
         axios.post('http://localhost:4000/movimento', body, config)
         .then(res => {
-            setMoviments(res.data)
-            console.log(moviments)
             setLoading(false)
-
-            // setValue(0)
-            // setDescription("")
-            // setLoading(false)
-            // history.push('/transactions')
+            history.push('/transactions')
         })  
         .catch(err => {
             setLoading(false)
@@ -60,9 +50,13 @@ export default function NewTransaction(){
     
     return(
         <Container>
-        <Title> Nova entrada </Title>
+        {(transactionType == "input") ?
+         <Title> Nova entrada </Title> 
+         :
+         <Title> Nova saída </Title>        
+        }       
         <form onSubmit={requestTransaction}>
-            <input type="number" value="input" required placeholder="Valor" 
+            <input type="number" min="1" step="0.01" value="input" required placeholder="Valor" 
             value={value} onChange={(e) => setValue(e.target.value)}/>
 
             <input type="text" description="input" placeholder="Descrição" 
@@ -70,7 +64,8 @@ export default function NewTransaction(){
 
             {(loading === true) ? 
             <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
-             : <button onClick={requestTransaction}> Salvar entrada </button>}
+             : 
+            <button onClick={requestTransaction}> {(transactionType == "input") ? "Salvar entrada" : "Salvar saída"} </button>}
         </form>               
     </Container>
     )
@@ -135,9 +130,8 @@ const Container = styled.div`
 const Title = styled.div`
     width: 168px;
     height: 31px;
-    margin: 25px 183px 40px 24px;
+    margin: 25px 183px 40px 45px;
     font-family: Raleway;
-    font-style: normal;
     font-weight: bold;
     font-size: 26px;
     line-height: 31px;

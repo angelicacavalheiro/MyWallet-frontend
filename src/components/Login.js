@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { Link, useHistory } from "react-router-dom";
-import { useState, useContext } from 'react';
-import UserContext from '.././contexts/UserContext';
-import Loader from "react-loader-spinner";
+import styled from 'styled-components'
+import { Link, useHistory } from "react-router-dom"
+import { useState, useContext } from 'react'
+import UserContext from '.././contexts/UserContext'
+import Loader from "react-loader-spinner"
 import axios from "axios"
 
 export default function Login(){
