@@ -3,7 +3,6 @@ import { useEffect, useState, useContext } from 'react';
 import UserContext from '.././contexts/UserContext';
 import axios from "axios"
 
-
 export default function Balance(){
 
     const {user} = useContext(UserContext);
@@ -28,8 +27,7 @@ export default function Balance(){
         return ""
     }
     
-    return(
-    
+    return(    
         <ShowBalance>
             { moviments.map((moviment) => {  
                 if(moviment.valor != null)   {
@@ -50,13 +48,12 @@ const ShowBalance = styled.section`
     display: flex;
     height: 24px;
     width: 307px;
-    margin: 20px auto 10px auto;
+    margin: 30px auto 10px auto;
     font-family: Raleway;
     font-size: 17px;
     line-height: 20px;
     justify-content: space-between;
     h4{
-
         font-weight: bold;        
         color: #000000;
     }

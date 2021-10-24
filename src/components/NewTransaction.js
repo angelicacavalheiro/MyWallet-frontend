@@ -14,7 +14,6 @@ export default function NewTransaction(){
     const history = useHistory()
     let input, output = false
 
-
     function requestTransaction(event) {    
 
         event.preventDefault();
@@ -128,12 +127,12 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-    width: 168px;
-    height: 31px;
-    margin: 25px 183px 40px 45px;
     font-family: Raleway;
     font-weight: bold;
     font-size: 26px;
     line-height: 31px;
+    color: #FFFFFF;
+    width: 326px;
+    margin: 25px auto 40px auto;
     color: #FFFFFF;
 `;

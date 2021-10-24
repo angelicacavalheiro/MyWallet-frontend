@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from 'react';
+import { BsPlusCircle, BsDashCircle } from 'react-icons/bs';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
 import UserContext from '.././contexts/UserContext';
 import axios from "axios"
 import Balance from './Balance';
@@ -16,6 +18,10 @@ export default function TransactionList(){
     function redirectToNewTransaction(event) {         
         setTransactionType(event)                 
         history.push('/newTransaction') //só pra testar           
+    }
+
+    function redirectToLogout(){
+        history.push('/')
     }
 
     useEffect(() => {
@@ -35,7 +41,10 @@ export default function TransactionList(){
 
     return(
         <Container>
-            <Title> Olá, fulano</Title>    
+            <TopStyled>
+                <Title> Olá, fulano</Title>     
+                <RiLogoutBoxRLineStyled onClick={() => redirectToLogout()}/> 
+            </TopStyled>
 
             {
                  moviments == null || moviments.length == 0
@@ -54,11 +63,14 @@ export default function TransactionList(){
                         <Balance/>
                     </ShowTransactions> 
                  )
-            }            
-
+            }           
             <Options>
-                <button onClick={() => redirectToNewTransaction("input")}> + Nova Entrada </button>
-                <button onClick={() => redirectToNewTransaction("output")}> - Nova Saída </button>
+                <button onClick={() => redirectToNewTransaction("input")}>
+                    <BsPlusCircleStyled/> Nova <br/> Entrada 
+                </button>
+                <button onClick={() => redirectToNewTransaction("output")}>
+                    <BsDashCircleStyled/> Nova  <br/> Saída 
+                </button>
             </Options>                
         </Container>
     )   
@@ -92,8 +104,25 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-
     }    
+`;
+const TopStyled = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 326px;
+    margin: 25px auto 22px auto;
+    color: #FFFFFF;
+`;
+
+const Title = styled.div`
+    font-family: Raleway;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+`;
+
+const RiLogoutBoxRLineStyled = styled(RiLogoutBoxRLine)` 
+    font-size: 35px;    
 `;
 
 const NoTransactions = styled.div`
@@ -153,7 +182,6 @@ const ShowTransactions = styled.div`
         font-family: Raleway;
         font-size: 16px;
     }
-
 `;
 
 const Options = styled.div `
@@ -161,15 +189,20 @@ const Options = styled.div `
     margin: 0 auto 16px auto;
     justify-content: space-between;    
     display:flex;
+    button{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: left;
+    }
+`;
+const BsPlusCircleStyled = styled(BsPlusCircle)`
+    color: #FFFFFF;   
+    font-size: 25px;
 `;
 
-const Title = styled.div`
-    height: 50px;
-    margin: 28px auto 22px 45px;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 26px;
-    line-height: 31px;
-    color: #FFFFFF;
+const BsDashCircleStyled = styled(BsDashCircle)`
+    color: #FFFFFF;   
+    font-size: 25px;
 `;
+
