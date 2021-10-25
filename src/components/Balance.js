@@ -39,16 +39,22 @@ export default function Balance(){
                 }              
             })}                               
             <h4>SALDO</h4>
-            <h5>{saldo} </h5>                                              
+            <h5 style={saldo >= 0 ? {color: "#03AC00"} : {color: "#C70000"} }> {(saldo).toString().replace('.', ',')} </h5>                                              
         </ShowBalance>            
     )   
 }
 
 const ShowBalance = styled.section`
+    position: fixed;
+    left: auto;
+    right: auto;
+    bottom: 144px;
+    padding-left: 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
     display: flex;
     height: 24px;
-    width: 307px;
-    margin: 30px auto 10px auto;
+    width: 313px;
     font-family: Raleway;
     font-size: 17px;
     line-height: 20px;
@@ -59,7 +65,6 @@ const ShowBalance = styled.section`
     }
     h5{        
         text-align: right;
-        color: #03AC00;
     }    
 `;
 

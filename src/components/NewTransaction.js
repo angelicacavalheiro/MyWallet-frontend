@@ -13,6 +13,8 @@ export default function NewTransaction(){
     const[loading, setLoading] = useState(false)
     const history = useHistory()
     let input, output = false
+    
+    const regex = /(^[1-9]\d{0,2}(\.\d{3})*,\d{2}$)/ig
 
     function requestTransaction(event) {    
 
@@ -32,9 +34,14 @@ export default function NewTransaction(){
             headers:{
                 Authorization: `Bearer ${user.token}`
             }
-        }
+        }        
 
-        const body = {valor: value, entrada: input, saida: output, descricao: description}
+        const body = {
+            valor: parseFloat(value).toFixed(2).replace(',', '.'), 
+            entrada: input, 
+            saida: output, 
+            descricao: description
+        }
     
         axios.post('http://localhost:4000/movimento', body, config)
         .then(res => {
@@ -55,7 +62,7 @@ export default function NewTransaction(){
          <Title> Nova saída </Title>        
         }       
         <form onSubmit={requestTransaction}>
-            <input type="number" min="1" step="0.01" value="input" required placeholder="Valor" 
+            <input type="number" min="1" step="any" value="input" required placeholder="Valor" 
             value={value} onChange={(e) => setValue(e.target.value)}/>
 
             <input type="text" description="input" placeholder="Descrição" 

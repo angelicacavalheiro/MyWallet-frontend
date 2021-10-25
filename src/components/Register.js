@@ -18,14 +18,12 @@ export default function Register(){
         history.push('/register') //só pra testar    
         event.preventDefault(); // impede o redirecionamento   
 
-        
         const body = {
             nome: name,
             email,
             senha: password,
             confirma_senha: confirmPassword
         }
-        console.log(body)
 
         axios.post('http://localhost:4000/sign-up', body)
         .then(res => {

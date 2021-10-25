@@ -21,7 +21,6 @@ export default function Login(){
 
         axios.post('http://localhost:4000/sign-in', body)
         .then(res => {
-            console.log(res.data)
             setUser(res.data)           
             history.push('/transactions')
             setLoading(false)                                 

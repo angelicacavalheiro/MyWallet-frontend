@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from 'react';
 import { BsPlusCircle, BsDashCircle } from 'react-icons/bs';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
@@ -7,13 +7,13 @@ import UserContext from '.././contexts/UserContext';
 import axios from "axios"
 import Balance from './Balance';
 
-
 export default function TransactionList(){
 
     const history = useHistory()
     const {user, setTransactionType} = useContext(UserContext);
 
     const [moviments, setMoviments] = useState(null)
+    const [userName, setUserName] = useState(null)
 
     function redirectToNewTransaction(event) {         
         setTransactionType(event)                 
@@ -36,13 +36,21 @@ export default function TransactionList(){
         .then(res => {
             setMoviments(res.data)
         })  
-    } , []);
 
+        axios.get('http://localhost:4000/sign-in', config)
+        .then(res => {
+            setUserName(res.data)
+        })  
+        .catch(err => {
+            console.log(err)        
+        })
+
+    } , []);
 
     return(
         <Container>
             <TopStyled>
-                <Title> Olá, fulano</Title>     
+                {(userName != null) ? <Title> Olá, {userName[0].toUpperCase() + userName.substr(1)}</Title> : " "}    
                 <RiLogoutBoxRLineStyled onClick={() => redirectToLogout()}/> 
             </TopStyled>
 
@@ -53,11 +61,11 @@ export default function TransactionList(){
                  :
                  (
                     <ShowTransactions>
-                    {moviments.reverse().map((moviment) => (                
+                    {moviments.map((moviment) => (                
                         <div style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>                       
                             <h1>{moviment.data}</h1>  
-                            <h2>{moviment.descricao}</h2>              
-                            <h3>{moviment.valor}</h3>                                                    
+                            <h2>{moviment.descricao}</h2>                                    
+                            <h3>{(moviment.valor).replace('.', ',')}</h3>                                               
                         </div>                
                     ))}
                         <Balance/>
@@ -66,10 +74,10 @@ export default function TransactionList(){
             }           
             <Options>
                 <button onClick={() => redirectToNewTransaction("input")}>
-                    <BsPlusCircleStyled/> Nova <br/> Entrada 
+                    <BsPlusCircleStyled/> Nova <br/> entrada 
                 </button>
                 <button onClick={() => redirectToNewTransaction("output")}>
-                    <BsDashCircleStyled/> Nova  <br/> Saída 
+                    <BsDashCircleStyled/> Nova  <br/> saída 
                 </button>
             </Options>                
         </Container>
@@ -148,17 +156,18 @@ const ShowTransactions = styled.div`
     background: #FFFFFF;
     border-radius: 5px;   
     margin: 0 auto 13px auto;
+    padding-bottom: 60px;
     overflow-y: scroll;
     
     &::-webkit-scrollbar {
     width: 8px;
     }
     &::-webkit-scrollbar-track {
-    background: #C6C6C6;
+    background: #FFFFFF;
     border-radius: 5px;
     }
     &::-webkit-scrollbar-thumb {
-    background-color: #8C11BE;
+    background-color: #C6C6C6;
     border-radius: 5px;
     }
     h1{
@@ -189,20 +198,21 @@ const Options = styled.div `
     margin: 0 auto 16px auto;
     justify-content: space-between;    
     display:flex;
+    color: #FFFFFF;  
     button{
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         text-align: left;
+        font-size: 17px;
     }
 `;
+
 const BsPlusCircleStyled = styled(BsPlusCircle)`
-    color: #FFFFFF;   
-    font-size: 25px;
+    font-size: 20px;
 `;
 
 const BsDashCircleStyled = styled(BsDashCircle)`
-    color: #FFFFFF;   
-    font-size: 25px;
+    font-size: 20px;
 `;
 
