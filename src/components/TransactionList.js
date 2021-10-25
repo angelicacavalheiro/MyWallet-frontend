@@ -156,7 +156,6 @@ const ShowTransactions = styled.div`
     background: #FFFFFF;
     border-radius: 5px;   
     margin: 0 auto 13px auto;
-    padding-bottom: 60px;
     overflow-y: scroll;
     
     &::-webkit-scrollbar {
