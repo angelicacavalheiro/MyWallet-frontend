@@ -13,8 +13,6 @@ export default function NewTransaction(){
     const[loading, setLoading] = useState(false)
     const history = useHistory()
     let input, output = false
-    
-    const regex = /(^[1-9]\d{0,2}(\.\d{3})*,\d{2}$)/ig
 
     function requestTransaction(event) {    
 
@@ -43,7 +41,7 @@ export default function NewTransaction(){
             descricao: description
         }
     
-        axios.post('http://localhost:4000/movimento', body, config)
+        axios.post('https://mywallet-driven.herokuapp.com/movimento', body, config)
         .then(res => {
             setLoading(false)
             history.push('/transactions')

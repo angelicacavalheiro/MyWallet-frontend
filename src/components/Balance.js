@@ -17,7 +17,7 @@ export default function Balance(){
             }
         }
 
-        axios.get('http://localhost:4000/movimento', config)
+        axios.get('https://mywallet-driven.herokuapp.com/movimento', config)
         .then(res => {
             setMoviments(res.data)
         })  

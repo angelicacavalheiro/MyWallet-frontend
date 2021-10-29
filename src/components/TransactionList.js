@@ -32,12 +32,12 @@ export default function TransactionList(){
             }
         }
 
-        axios.get('http://localhost:4000/movimento', config)
+        axios.get('https://mywallet-driven.herokuapp.com/movimento', config)
         .then(res => {
             setMoviments(res.data)
         })  
 
-        axios.get('http://localhost:4000/sign-in', config)
+        axios.get('https://mywallet-driven.herokuapp.com/sign-in', config)
         .then(res => {
             setUserName(res.data)
         })  

@@ -25,7 +25,7 @@ export default function Register(){
             confirma_senha: confirmPassword
         }
 
-        axios.post('http://localhost:4000/sign-up', body)
+        axios.post('https://mywallet-driven.herokuapp.com/sign-up', body)
         .then(res => {
             setLoading(false)
             console.log(res.data)

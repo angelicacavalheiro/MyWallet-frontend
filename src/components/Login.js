@@ -19,7 +19,7 @@ export default function Login(){
 
         const body = {email, senha: password}
 
-        axios.post('http://localhost:4000/sign-in', body)
+        axios.post('https://mywallet-driven.herokuapp.com/sign-in', body)
         .then(res => {
             setUser(res.data)           
             history.push('/transactions')
