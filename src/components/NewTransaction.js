@@ -26,7 +26,12 @@ export default function NewTransaction(){
         } else {
             input = false
             output = true
-        }       
+        }     
+
+        if(value <= 0){
+            setLoading(false)
+            return alert("o valor precisa ser maior que zero")
+        }  
 
         const config = {
             headers:{
