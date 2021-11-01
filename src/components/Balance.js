@@ -23,21 +23,26 @@ export default function Balance(){
         })  
     } , []);
 
+    function calculateBalance(){
+        moviments.map((moviment) => {  
+            if(moviment.valor != null)   {
+                moviment.entrada == "true" 
+                ?
+                    saldo = saldo + parseFloat(moviment.valor)
+                :
+                    saldo = saldo - parseFloat(moviment.valor)
+            }              
+        })
+    }
+
     if(moviments === null){
         return ""
     }
+
+    calculateBalance()    
     
     return(    
-        <ShowBalance>
-            { moviments.map((moviment) => {  
-                if(moviment.valor != null)   {
-                    moviment.entrada == "true" 
-                    ?
-                        saldo = saldo + parseFloat(moviment.valor)
-                    :
-                        saldo = saldo - parseFloat(moviment.valor)
-                }              
-            })}                               
+        <ShowBalance >                               
             <h4>SALDO</h4>
             <h5 style={saldo >= 0 ? {color: "#03AC00"} : {color: "#C70000"} }> {(saldo).toString().replace('.', ',')} </h5>                                              
         </ShowBalance>            

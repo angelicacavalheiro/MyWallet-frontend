@@ -44,9 +44,11 @@ export default function Login(){
             <input type="password" password="input" placeholder="Senha" 
             value={password} onChange={(e) => setPassword(e.target.value)}/>        
 
-            {(loading === true) ? 
-            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
-             : <button onClick={requestLogin}> Entrar </button>}
+            <button onClick={requestLogin} disabled={loading}>
+                        {(loading === true) ? 
+                        <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} />
+                        :  "Entrar"}        
+            </button>
 
             <Link to={`/register`} style={{textDecoration: 'none'}}>
                 <p>Primeira vez? Cadastre-se</p>

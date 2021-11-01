@@ -54,11 +54,13 @@ export default function NewTransaction(){
     
     return(
         <Container>
+        <Title> Nova
         {(transactionType == "input") ?
-         <Title> Nova entrada </Title> 
-         :
-         <Title> Nova saída </Title>        
-        }       
+                " entrada" 
+                :
+                " saída"        
+                } 
+        </Title>      
         <form onSubmit={requestTransaction}>
             <input type="number" min="1" step="any" value="input" required placeholder="Valor" 
             value={value} onChange={(e) => setValue(e.target.value)}/>
@@ -69,7 +71,7 @@ export default function NewTransaction(){
             {(loading === true) ? 
             <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
              : 
-            <button onClick={requestTransaction}> {(transactionType == "input") ? "Salvar entrada" : "Salvar saída"} </button>}
+            <button onClick={requestTransaction}> Salvar {(transactionType == "input") ? "entrada" : "saída"} </button>}
         </form>               
     </Container>
     )
