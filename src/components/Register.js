@@ -15,7 +15,7 @@ export default function Register(){
     
     function requestRegistration(event) {    
         setLoading(true)
-        //event.preventDefault(); // impede o redirecionamento   
+        event.preventDefault(); // impede o redirecionamento   
 
         const body = {
             nome: name,
