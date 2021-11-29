@@ -35,15 +35,24 @@ By using this app any user can learn how they've been using their money and alwa
 ```bash
 npm i
 ```
-5. Run the front-end with
+
+5. Run the front-end in production mode with
 ```bash
 npm start
 ```
-6. You can optionally build the project running
+
+6. Run the front-end in development mode with
+```bash
+npm test
+```
+In this case you need to adapt the URL that accesses the backend, in the frontend scripts, with the credentials you configured for the development environment in the backend.
+
+7. You can optionally build the project running
 ```bash
 npm run build
 ```
-7. Finally access http://localhost:3000 on your favorite browser.
+
+8. Finally access http://localhost:3000 on your favorite browser.
 
 ## How to contribute
 1. Fork the project.
