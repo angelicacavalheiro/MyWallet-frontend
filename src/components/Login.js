@@ -12,23 +12,25 @@ export default function Login(){
     const[password, setPassword] = useState("")
     const[loading, setLoading] = useState(false)
     const history = useHistory()
-    
-    function requestLogin(event) {    
-        setLoading(true)  
-        event.preventDefault(); // impede o redirecionamento   
+
+    function requestLogin(event) {
+        setLoading(true)
+        event.preventDefault(); // impede o redirecionamento
 
         const body = {email, senha: password}
 
-        axios.post('https://mywallet-driven.herokuapp.com/sign-in', body)
+        console.log(`${process.env.REACT_APP_HOST_API}sign-in`)
+
+        axios.post(`${process.env.REACT_APP_HOST_API}sign-in`, body)
         .then(res => {
-            setUser(res.data)           
+            setUser(res.data)
             history.push('/transactions')
-            setLoading(false)                                 
+            setLoading(false)
         })
 
         .catch(err => {
             setLoading(false)
-            console.log(err)        
+            console.log(err)
             alert("tente novamente")
         })
     }
@@ -38,16 +40,16 @@ export default function Login(){
         <Logo> MyWallet </Logo>
         <form onSubmit={requestLogin}>
 
-            <input type="email" email="input" required placeholder="E-mail" 
+            <input type="email" email="input" required placeholder="E-mail"
             value={email} onChange={(e) => setEmail(e.target.value)}/>
 
-            <input type="password" password="input" placeholder="Senha" 
-            value={password} onChange={(e) => setPassword(e.target.value)}/>        
+            <input type="password" password="input" placeholder="Senha"
+            value={password} onChange={(e) => setPassword(e.target.value)}/>
 
             <button onClick={requestLogin} disabled={loading}>
-                        {(loading === true) ? 
+                        {(loading === true) ?
                         <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} />
-                        :  "Entrar"}        
+                        :  "Entrar"}
             </button>
 
             <Link to={`/register`} style={{textDecoration: 'none'}}>
@@ -60,11 +62,11 @@ export default function Login(){
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;	
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;    
-	
+    background: #8C11BE;
+
 	p {
         font-family: Raleway;
         font-weight: bold;
@@ -87,8 +89,8 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        opacity: ${props => props.loading ? 0.7 : 1};    
-        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};  
+        opacity: ${props => props.loading ? 0.7 : 1};
+        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
         pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
     }
     button{
@@ -122,5 +124,5 @@ const Logo = styled.div`
     font-family: Saira Stencil One;
     font-size: 32px;
     line-height: 50px;
-    color: #FFFFFF;	
+    color: #FFFFFF;
 `;

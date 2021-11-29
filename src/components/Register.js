@@ -12,10 +12,10 @@ export default function Register(){
     const[confirmPassword, setConfirmPassword] = useState("")
     const[loading, setLoading] = useState(false)
     const history = useHistory()
-    
-    function requestRegistration(event) {    
+
+    function requestRegistration(event) {
         setLoading(true)
-        event.preventDefault(); // impede o redirecionamento   
+        event.preventDefault(); // impede o redirecionamento
 
         const body = {
             nome: name,
@@ -23,8 +23,8 @@ export default function Register(){
             senha: password,
             confirma_senha: confirmPassword
         }
-
-        axios.post('https://mywallet-driven.herokuapp.com/sign-up', body)
+        console.log(`${process.env.REACT_APP_HOST_API}sign-up`)
+        axios.post(`${process.env.REACT_APP_HOST_API}sign-up`, body)
         .then(res => {
             setLoading(false)
             console.log(res.data)
@@ -43,19 +43,19 @@ export default function Register(){
         <Logo> MyWallet </Logo>
         <form onSubmit={requestRegistration}>
 
-            <input type="text" name="input" required placeholder="Nome" 
+            <input type="text" name="input" required placeholder="Nome"
             value={name} onChange={(e) => setName(e.target.value)}/>
 
-            <input type="email" email="input" required placeholder="E-mail" 
+            <input type="email" email="input" required placeholder="E-mail"
             value={email} onChange={(e) => setEmail(e.target.value)}/>
 
-            <input type="password" password="input" placeholder="Senha" 
+            <input type="password" password="input" placeholder="Senha"
             value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-            <input type="password" password="input" placeholder="Confirme a senha" 
-            value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>            
+            <input type="password" password="input" placeholder="Confirme a senha"
+            value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
 
-            {(loading === true) ? 
+            {(loading === true) ?
             <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
              : <button onClick={requestRegistration}> Cadastrar </button>}
 
@@ -69,11 +69,11 @@ export default function Register(){
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;	
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;    
-	
+    background: #8C11BE;
+
 	p {
         font-family: Raleway;
         font-weight: bold;
@@ -96,8 +96,8 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        opacity: ${props => props.loading ? 0.7 : 1};    
-        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};  
+        opacity: ${props => props.loading ? 0.7 : 1};
+        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
         pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
     }
     button{
@@ -131,5 +131,5 @@ const Logo = styled.div`
     font-family: Saira Stencil One;
     font-size: 32px;
     line-height: 50px;
-    color: #FFFFFF;	
+    color: #FFFFFF;
 `;

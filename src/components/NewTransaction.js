@@ -46,7 +46,7 @@ export default function NewTransaction(){
             descricao: description
         }
 
-        axios.post('https://mywallet-driven.herokuapp.com/movimento', body, config)
+        axios.post(`${process.env.REACT_APP_HOST_API}movimento`, body, config)
         .then(res => {
             setLoading(false)
             history.push('/transactions')

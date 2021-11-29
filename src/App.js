@@ -7,37 +7,36 @@ import Register from "./components/Register";
 import TransactionList from "./components/TransactionList"
 import NewTransaction from "./components/NewTransaction";
 
-function App() {  
-
+function App() {
   const [user, setUser] = useState(null)
   const [transactionType, setTransactionType] = useState(false)
 
   return (
-    <BrowserRouter> 
+    <BrowserRouter>
       <Switch>
 
       <UserContext.Provider value={{user, setUser, transactionType, setTransactionType}}>
 
         <Route path="/" exact>
           <Login />
-        </ Route> 
+        </ Route>
 
         <Route path="/register" exact>
           <Register />
-        </ Route>        
+        </ Route>
 
         <Route path="/transactions" exact>
           <TransactionList />
-        </ Route> 
+        </ Route>
 
         <Route path="/newTransaction" exact>
           <NewTransaction />
-        </ Route>  
+        </ Route>
 
-      </UserContext.Provider>   
+      </UserContext.Provider>
 
-      </ Switch>       
-    </ BrowserRouter>   
+      </ Switch>
+    </ BrowserRouter>
   );
 }
 

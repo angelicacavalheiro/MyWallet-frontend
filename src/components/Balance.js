@@ -17,21 +17,21 @@ export default function Balance(){
             }
         }
 
-        axios.get('https://mywallet-driven.herokuapp.com/movimento', config)
+        axios.get(`${process.env.REACT_APP_HOST_API}movimento`, config)
         .then(res => {
             setMoviments(res.data)
-        })  
+        })
     } , []);
 
     function calculateBalance(){
-        moviments.map((moviment) => {  
+        moviments.map((moviment) => {
             if(moviment.valor != null)   {
-                moviment.entrada == "true" 
+                moviment.entrada == "true"
                 ?
                     saldo = saldo + parseFloat(moviment.valor)
                 :
                     saldo = saldo - parseFloat(moviment.valor)
-            }              
+            }
         })
     }
 
@@ -39,14 +39,14 @@ export default function Balance(){
         return ""
     }
 
-    calculateBalance()    
-    
-    return(    
-        <ShowBalance >                               
+    calculateBalance()
+
+    return(
+        <ShowBalance >
             <h4>SALDO</h4>
-            <h5 style={saldo >= 0 ? {color: "#03AC00"} : {color: "#C70000"} }> {(saldo).toString().replace('.', ',')} </h5>                                              
-        </ShowBalance>            
-    )   
+            <h5 style={saldo >= 0 ? {color: "#03AC00"} : {color: "#C70000"} }> {(saldo).toString().replace('.', ',')} </h5>
+        </ShowBalance>
+    )
 }
 
 const ShowBalance = styled.section`
@@ -62,11 +62,11 @@ const ShowBalance = styled.section`
     line-height: 20px;
     justify-content: space-between;
     h4{
-        font-weight: bold;        
+        font-weight: bold;
         color: #000000;
     }
-    h5{        
+    h5{
         text-align: right;
-    }    
+    }
 `;
 

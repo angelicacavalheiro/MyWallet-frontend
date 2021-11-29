@@ -15,9 +15,9 @@ export default function TransactionList(){
     const [moviments, setMoviments] = useState(null)
     const [userName, setUserName] = useState(null)
 
-    function redirectToNewTransaction(event) {         
-        setTransactionType(event)                 
-        history.push('/newTransaction') //só pra testar           
+    function redirectToNewTransaction(event) {
+        setTransactionType(event)
+        history.push('/newTransaction') //só pra testar
     }
 
     function redirectToLogout(){
@@ -32,17 +32,17 @@ export default function TransactionList(){
             }
         }
 
-        axios.get('https://mywallet-driven.herokuapp.com/movimento', config)
+        axios.get(`${process.env.REACT_APP_HOST_API}movimento`, config)
         .then(res => {
             setMoviments(res.data)
-        })  
+        })
 
-        axios.get('https://mywallet-driven.herokuapp.com/sign-in', config)
+        axios.get(`${process.env.REACT_APP_HOST_API}sign-in`, config)
         .then(res => {
             setUserName(res.data)
-        })  
+        })
         .catch(err => {
-            console.log(err)        
+            console.log(err)
         })
 
     } , []);
@@ -50,46 +50,46 @@ export default function TransactionList(){
     return(
         <Container>
             <TopStyled>
-                {(userName != null) ? <Title> Olá, {userName[0].toUpperCase() + userName.substr(1)}</Title> : " "}    
-                <RiLogoutBoxRLineStyled onClick={() => redirectToLogout()}/> 
+                {(userName != null) ? <Title> Olá, {userName[0].toUpperCase() + userName.substr(1)}</Title> : " "}
+                <RiLogoutBoxRLineStyled onClick={() => redirectToLogout()}/>
             </TopStyled>
 
             {
                  moviments == null || moviments.length == 0
                  ?
-                 <NoTransactions>Não há registros de entrada ou saída</NoTransactions>                 
+                 <NoTransactions>Não há registros de entrada ou saída</NoTransactions>
                  :
                  (
                     <ShowTransactions>
-                    {moviments.map((moviment) => (                
-                        <div style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>                       
-                            <h1>{moviment.data}</h1>  
-                            <h2>{moviment.descricao}</h2>                                    
-                            <h3>{(moviment.valor).replace('.', ',')}</h3>                                               
-                        </div>                
+                    {moviments.map((moviment) => (
+                        <div style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>
+                            <h1>{moviment.data}</h1>
+                            <h2>{moviment.descricao}</h2>
+                            <h3>{(moviment.valor).replace('.', ',')}</h3>
+                        </div>
                     ))}
                         <Balance/>
-                    </ShowTransactions> 
+                    </ShowTransactions>
                  )
-            }           
+            }
             <Options>
                 <button onClick={() => redirectToNewTransaction("input")}>
-                    <BsPlusCircleStyled/> Nova <br/> entrada 
+                    <BsPlusCircleStyled/> Nova <br/> entrada
                 </button>
                 <button onClick={() => redirectToNewTransaction("output")}>
-                    <BsDashCircleStyled/> Nova  <br/> saída 
+                    <BsDashCircleStyled/> Nova  <br/> saída
                 </button>
-            </Options>                
+            </Options>
         </Container>
-    )   
+    )
 }
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;	
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;   	
+    background: #8C11BE;
 	p {
         font-family: Raleway;
         font-weight: bold;
@@ -112,7 +112,7 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-    }    
+    }
 `;
 const TopStyled = styled.div`
     display: flex;
@@ -129,24 +129,24 @@ const Title = styled.div`
     line-height: 31px;
 `;
 
-const RiLogoutBoxRLineStyled = styled(RiLogoutBoxRLine)` 
-    font-size: 35px;    
+const RiLogoutBoxRLineStyled = styled(RiLogoutBoxRLine)`
+    font-size: 35px;
 `;
 
 const NoTransactions = styled.div`
     width: 326px;
     height: 446px;
     background: #FFFFFF;
-    border-radius: 5px;   
+    border-radius: 5px;
     margin: 0 auto 13px auto;
-    
+
     font-family: Raleway;
     font-size: 20px;
     line-height: 23px;
     color: #868686;
     display:flex;
     padding: 200px 72px 200px 73px;
-    align-items: center;   
+    align-items: center;
     text-align: center;
 `;
 
@@ -154,10 +154,10 @@ const ShowTransactions = styled.div`
     width: 326px;
     height: 446px;
     background: #FFFFFF;
-    border-radius: 5px;   
+    border-radius: 5px;
     margin: 0 auto 13px auto;
     overflow-y: scroll;
-    
+
     &::-webkit-scrollbar {
     width: 8px;
     }
@@ -172,12 +172,12 @@ const ShowTransactions = styled.div`
     h1{
         color: #C6C6C6;
         width: 60px;
-    }   
+    }
     h2{
         color: #000000;
         width: 175px;
     }
-    h3{    
+    h3{
         width: 72px;
         display: flex;
         justify-content: flex-end;
@@ -186,7 +186,7 @@ const ShowTransactions = styled.div`
         display: flex;
         height: 24px;
         width: 307px;
-        margin: 23px auto 0 auto;       
+        margin: 23px auto 0 auto;
         font-family: Raleway;
         font-size: 16px;
     }
@@ -195,9 +195,9 @@ const ShowTransactions = styled.div`
 const Options = styled.div `
     width: 325px;
     margin: 0 auto 16px auto;
-    justify-content: space-between;    
+    justify-content: space-between;
     display:flex;
-    color: #FFFFFF;  
+    color: #FFFFFF;
     button{
         display: flex;
         flex-direction: column;
