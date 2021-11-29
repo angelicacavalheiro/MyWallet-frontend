@@ -7,7 +7,7 @@ import axios from "axios"
 
 export default function Login(){
 
-    const {user, setUser} = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
     const[email, setEmail] = useState("")
     const[password, setPassword] = useState("")
     const[loading, setLoading] = useState(false)
@@ -18,8 +18,6 @@ export default function Login(){
         event.preventDefault(); // impede o redirecionamento
 
         const body = {email, senha: password}
-
-        console.log(`${process.env.REACT_APP_HOST_API}sign-in`)
 
         axios.post(`${process.env.REACT_APP_HOST_API}sign-in`, body)
         .then(res => {
@@ -120,7 +118,6 @@ const Logo = styled.div`
     width: 147px;
     height: 50px;
     margin: 159px auto 24px auto;
-
     font-family: Saira Stencil One;
     font-size: 32px;
     line-height: 50px;

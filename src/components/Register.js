@@ -127,7 +127,6 @@ const Logo = styled.div`
     width: 147px;
     height: 50px;
     margin: 95px auto 28px auto;
-
     font-family: Saira Stencil One;
     font-size: 32px;
     line-height: 50px;

@@ -214,4 +214,3 @@ const BsPlusCircleStyled = styled(BsPlusCircle)`
 const BsDashCircleStyled = styled(BsDashCircle)`
     font-size: 20px;
 `;
-
