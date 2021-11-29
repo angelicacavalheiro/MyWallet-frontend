@@ -18,6 +18,34 @@ This is an web application with which lots of people can manage their own expens
 
 By using this app any user can learn how they've been using their money and always keep track of your balance.
 
+## How to run
+
+1. Clone this repository
+2. Clone the back-end repository at https://github.com/angelicacavalheiro/MyWallet-backend
+3. Follow instructions to run back-end at https://github.com/angelicacavalheiro/MyWallet-backend
+4. Install dependencies
+```
+npm i
+```
+
+5. Run the front-end in production mode with
+```
+$ ntl -> start
+```
+
+6. Run the front-end in development mode with
+```
+$ ntl -> test
+```
+In this case you need to adapt the URL that accesses the backend, in the frontend scripts, with the credentials you configured for the development environment in the backend.
+
+7. You can optionally build the project running
+```
+$ ntl -> build
+```
+
+8. Finally access http://localhost:3000 on your favorite browser.
+
 ## Built With
 -   **[React](https://reactjs.org/)**
 -   **[Axios](https://axios-http.com/)**
@@ -25,34 +53,6 @@ By using this app any user can learn how they've been using their money and alwa
 -   **[React-icons](https://react-icons.github.io/react-icons)**
 -   **[Styled-components](https://styled-components.com/)**
 ##
-
-## How to run
-
-1. Clone this repository
-2. Clone the back-end repository at https://github.com/angelicacavalheiro/MyWallet-backend
-3. Follow instructions to run back-end at https://github.com/angelicacavalheiro/MyWallet-backend
-4. Install dependencies
-```bash
-npm i
-```
-
-5. Run the front-end in production mode with
-```bash
-$ ntl -> start
-```
-
-6. Run the front-end in development mode with
-```bash
-$ ntl -> test
-```
-In this case you need to adapt the URL that accesses the backend, in the frontend scripts, with the credentials you configured for the development environment in the backend.
-
-7. You can optionally build the project running
-```bash
-$ ntl -> build
-```
-
-8. Finally access http://localhost:3000 on your favorite browser.
 
 ## How to contribute
 1. Fork the project.
