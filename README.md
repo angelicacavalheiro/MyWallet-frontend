@@ -38,18 +38,18 @@ npm i
 
 5. Run the front-end in production mode with
 ```bash
-npm start
+$ ntl -> start
 ```
 
 6. Run the front-end in development mode with
 ```bash
-npm test
+$ ntl -> test
 ```
 In this case you need to adapt the URL that accesses the backend, in the frontend scripts, with the credentials you configured for the development environment in the backend.
 
 7. You can optionally build the project running
 ```bash
-npm run build
+$ ntl -> build
 ```
 
 8. Finally access http://localhost:3000 on your favorite browser.
