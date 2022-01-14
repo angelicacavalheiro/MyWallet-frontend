@@ -21,7 +21,8 @@ export default function Login(){
 
         axios.post(`${process.env.REACT_APP_HOST_API}sign-in`, body)
         .then(res => {
-            setUser(res.data)
+            setUser(res.data);
+            localStorage.setItem('@user', JSON.stringify(res.data));
             history.push('/transactions')
             setLoading(false)
         })

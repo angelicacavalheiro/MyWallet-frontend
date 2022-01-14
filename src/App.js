@@ -8,8 +8,9 @@ import TransactionList from "./components/TransactionList"
 import NewTransaction from "./components/NewTransaction";
 
 function App() {
-  const [user, setUser] = useState(null)
   const [transactionType, setTransactionType] = useState(false)
+  const userData = JSON.parse(localStorage.getItem('@user'));
+  const [user, setUser] = useState(userData);
 
   return (
     <BrowserRouter>

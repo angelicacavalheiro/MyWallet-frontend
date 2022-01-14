@@ -11,7 +11,7 @@ import Balance from './Balance';
 export default function TransactionList(){
 
     const history = useHistory()
-    const {user, setTransactionType} = useContext(UserContext);
+    const {user, setUser, setTransactionType} = useContext(UserContext);
 
     const [moviments, setMoviments] = useState(null)
     const [userName, setUserName] = useState(null)
@@ -22,6 +22,8 @@ export default function TransactionList(){
     }
 
     function redirectToLogout(){
+        localStorage.clear();
+        setUser("")
         history.push('/')
     }
 
