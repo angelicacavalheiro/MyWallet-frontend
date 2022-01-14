@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from 'styled-components';
 import { useEffect, useState, useContext } from 'react';
 import UserContext from '.././contexts/UserContext';
@@ -26,7 +28,7 @@ export default function Balance(){
     function calculateBalance(){
         moviments.map((moviment) => {
             if(moviment.valor != null)   {
-                moviment.entrada == "true"
+                moviment.entrada === "true"
                 ?
                     saldo = saldo + parseFloat(moviment.valor)
                 :

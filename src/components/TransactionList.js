@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from 'react';
@@ -55,14 +56,14 @@ export default function TransactionList(){
             </TopStyled>
 
             {
-                 moviments == null || moviments.length == 0
+                 moviments == null || moviments.length === 0
                  ?
                  <NoTransactions>Não há registros de entrada ou saída</NoTransactions>
                  :
                  (
                     <ShowTransactions>
-                    {moviments.map((moviment) => (
-                        <div style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>
+                    {moviments.map((moviment, index) => (
+                        <div key={index} style={moviment.entrada === "true" ? {color: "#03AC00"}: {color: "#C70000"} }>
                             <h1>{moviment.data}</h1>
                             <h2>{moviment.descricao}</h2>
                             <h3>{(moviment.valor).replace('.', ',')}</h3>

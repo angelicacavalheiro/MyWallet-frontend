@@ -23,11 +23,9 @@ export default function Register(){
             senha: password,
             confirma_senha: confirmPassword
         }
-        console.log(`${process.env.REACT_APP_HOST_API}sign-up`)
         axios.post(`${process.env.REACT_APP_HOST_API}sign-up`, body)
         .then(res => {
             setLoading(false)
-            console.log(res.data)
             history.push('/')
         })
 
@@ -39,27 +37,27 @@ export default function Register(){
     }
 
     return(
-        <Container loading={loading} >
+        <Container >
         <Logo> MyWallet </Logo>
         <form onSubmit={requestRegistration}>
 
             <input type="text" name="input" required placeholder="Nome"
-            value={name} onChange={(e) => setName(e.target.value)}/>
+            value={name} onChange={(e) => setName(e.target.value)} disabled={loading}/>
 
             <input type="email" email="input" required placeholder="E-mail"
-            value={email} onChange={(e) => setEmail(e.target.value)}/>
+            value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading}/>
 
             <input type="password" password="input" placeholder="Senha"
-            value={password} onChange={(e) => setPassword(e.target.value)}/>
+            value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading}/>
 
             <input type="password" password="input" placeholder="Confirme a senha"
-            value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+            value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={loading}/>
 
-            {(loading === true) ?
-            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
+            {(loading) ?
+            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} disabled={loading} /> </button>
              : <button onClick={requestRegistration}> Cadastrar </button>}
 
-            <Link to={`/`} style={{textDecoration: 'none'}}>
+            <Link to={`/`} style={{textDecoration: 'none'}} disabled={loading}>
                 <p>Já tem uma conta? Entre agora!</p>
             </Link>
         </form>
@@ -96,9 +94,9 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     button{
         width: 326px;
@@ -113,8 +111,8 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     form {
         text-align: center;

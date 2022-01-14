@@ -34,23 +34,23 @@ export default function Login(){
     }
 
     return(
-        <Container loading={loading} >
+        <Container >
         <Logo> MyWallet </Logo>
-        <form onSubmit={requestLogin}>
+        <form  onSubmit={requestLogin}>
 
             <input type="email" email="input" required placeholder="E-mail"
-            value={email} onChange={(e) => setEmail(e.target.value)}/>
+            value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
 
             <input type="password" password="input" placeholder="Senha"
-            value={password} onChange={(e) => setPassword(e.target.value)}/>
+            value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading}/>
 
             <button onClick={requestLogin} disabled={loading}>
-                        {(loading === true) ?
+                        {(loading) ?
                         <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} />
                         :  "Entrar"}
             </button>
 
-            <Link to={`/register`} style={{textDecoration: 'none'}}>
+            <Link to={`/register`} style={{textDecoration: 'none'}} disabled={loading}>
                 <p>Primeira vez? Cadastre-se</p>
             </Link>
         </form>
@@ -87,9 +87,9 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     button{
         width: 326px;
@@ -104,8 +104,8 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     form {
         text-align: center;

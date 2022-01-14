@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import { useState, useContext } from 'react';
@@ -8,7 +9,7 @@ import axios from "axios"
 export default function NewTransaction(){
 
     const {user, transactionType} = useContext(UserContext);
-    const[value, setValue] = useState()
+    const[value, setValue] = useState("")
     const[description, setDescription] = useState("")
     const[loading, setLoading] = useState(false)
     const history = useHistory()
@@ -20,7 +21,7 @@ export default function NewTransaction(){
 
         setLoading(true)
 
-        if (transactionType == "input"){
+        if (transactionType === "input"){
             input = true
             output = false
         } else {
@@ -60,23 +61,38 @@ export default function NewTransaction(){
     return(
         <Container>
         <Title> Nova
-        {(transactionType == "input") ?
+        {(transactionType === "input") ?
                 " entrada"
                 :
                 " saída"
                 }
         </Title>
         <form onSubmit={requestTransaction}>
-            <input type="number" pattern='^[1-9]\d{0,2}(\.\d{3})*,\d{2}$' min="1" step="any" value="input" required placeholder="Valor"
-            value={value} onChange={(e) => setValue(e.target.value)}/>
+            <input
+                type="number"
+                pattern='^[1-9]\d{0,2}(\.\d{3})*,\d{2}$'
+                min="1"
+                step="any"
+                required
+                placeholder="Valor"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                disabled={loading}
+            />
 
-            <input type="text" description="input" placeholder="Descrição"
-            value={description} onChange={(e) => setDescription(e.target.value)}/>
+            <input
+                type="text"
+                description="input"
+                placeholder="Descrição"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                disabled={loading}
+            />
 
-            {(loading === true) ?
-            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} /> </button>
+            {(loading) ?
+            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} disabled={loading}/> </button>
              :
-            <button onClick={requestTransaction}> Salvar {(transactionType == "input") ? "entrada" : "saída"} </button>}
+            <button onClick={requestTransaction}> Salvar {(transactionType === "input") ? "entrada" : "saída"} </button>}
         </form>
     </Container>
     )
@@ -111,9 +127,9 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #000000;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        background: ${props => props.loading ? "#F2F2F2" : "#FFFFFF"};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     button{
         width: 326px;
@@ -128,8 +144,8 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
-        opacity: ${props => props.loading ? 0.7 : 1};
-        pointer-events: ${props => props.loading ? "none" : "visiblePainted"};
+        opacity: ${props => props.disabled ? 0.7 : 1};
+        pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     form {
         text-align: center;
