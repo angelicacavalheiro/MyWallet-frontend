@@ -10,7 +10,8 @@
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "5.3.0",
     "react-scripts": "^4.0.3",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "sweetalert2": "^11.3.5"
   },
   "scripts": {
     "start": "REACT_APP_HOST_API=https://mywallet-driven.herokuapp.com/ react-scripts start",
