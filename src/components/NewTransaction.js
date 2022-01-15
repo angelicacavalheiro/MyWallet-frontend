@@ -56,7 +56,6 @@ export default function NewTransaction(){
         .then(res => {
             setLoading(false)
             Swal.fire({
-                position: 'top-end',
                 icon: 'success',
                 title: 'Registro efetuado!',
                 showConfirmButton: false,

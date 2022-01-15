@@ -28,7 +28,6 @@ export default function Register(){
         .then(res => {
             setLoading(false)
             Swal.fire({
-                position: 'top-end',
                 icon: 'success',
                 title: 'Usuário cadastrado',
                 showConfirmButton: false,
