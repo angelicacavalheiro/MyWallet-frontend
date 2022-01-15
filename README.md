@@ -10,7 +10,8 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
 This is an web application with which lots of people can manage their own expenses and revenues. Below are the implemented features:
 
 - Sign Up
-- Login
+- sign In
+- Sign Out
 - List all financial events for a user
 - Add expense
 - Add revenue
