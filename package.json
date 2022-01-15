@@ -14,9 +14,9 @@
     "sweetalert2": "^11.3.5"
   },
   "scripts": {
-    "start": "REACT_APP_HOST_API=https://mywallet-driven.herokuapp.com/ react-scripts start",
-    "build": "react-scripts build",
-    "test": "REACT_APP_HOST_API=http://localhost:4001/ react-scripts test",
+    "start": "REACT_APP_API_URL=http://localhost:4001/ react-scripts start",
+    "build": "REACT_APP_API_URL=https://mywallet-driven.herokuapp.com/ react-scripts build",
+    "test": "REACT_APP_API_URL=http://localhost:4001/ react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

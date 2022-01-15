@@ -35,12 +35,12 @@ export default function TransactionList(){
             }
         }
 
-        axios.get(`${process.env.REACT_APP_HOST_API}movimento`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}movimento`, config)
         .then(res => {
             setMoviments(res.data)
         })
 
-        axios.get(`${process.env.REACT_APP_HOST_API}sign-in`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}sign-in`, config)
         .then(res => {
             setUserName(res.data)
         })

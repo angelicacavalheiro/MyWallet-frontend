@@ -20,7 +20,7 @@ export default function Login(){
 
         const body = {email, senha: password}
 
-        axios.post(`${process.env.REACT_APP_HOST_API}sign-in`, body)
+        axios.post(`${process.env.REACT_APP_API_URL}sign-in`, body)
         .then(res => {
             setUser(res.data);
             localStorage.setItem('@user', JSON.stringify(res.data));

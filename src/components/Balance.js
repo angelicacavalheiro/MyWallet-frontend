@@ -19,7 +19,7 @@ export default function Balance(){
             }
         }
 
-        axios.get(`${process.env.REACT_APP_HOST_API}movimento`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}movimento`, config)
         .then(res => {
             setMoviments(res.data)
         })

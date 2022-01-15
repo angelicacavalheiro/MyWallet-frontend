@@ -52,7 +52,7 @@ export default function NewTransaction(){
             descricao: description
         }
 
-        axios.post(`${process.env.REACT_APP_HOST_API}movimento`, body, config)
+        axios.post(`${process.env.REACT_APP_API_URL}movimento`, body, config)
         .then(res => {
             setLoading(false)
             history.push('/transactions')

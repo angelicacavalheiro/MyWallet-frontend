@@ -24,7 +24,7 @@ export default function Register(){
             senha: password,
             confirma_senha: confirmPassword
         }
-        axios.post(`${process.env.REACT_APP_HOST_API}sign-up`, body)
+        axios.post(`${process.env.REACT_APP_API_URL}sign-up`, body)
         .then(res => {
             setLoading(false)
             history.push('/')
