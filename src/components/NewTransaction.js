@@ -55,6 +55,13 @@ export default function NewTransaction(){
         axios.post(`${process.env.REACT_APP_API_URL}movimento`, body, config)
         .then(res => {
             setLoading(false)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Registro efetuado!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push('/transactions')
         })
         .catch(err => {

@@ -27,6 +27,13 @@ export default function Register(){
         axios.post(`${process.env.REACT_APP_API_URL}sign-up`, body)
         .then(res => {
             setLoading(false)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Usuário cadastrado',
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push('/')
         })
 
