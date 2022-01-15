@@ -92,37 +92,39 @@ const Container = styled.div`
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;
+    background: #D36582;
+
+    button{
+        width: 155px;
+        height: 114px;
+        background: #253C78;
+        border-color: #253C78;
+        border-radius: 5px;
+        font-family: Raleway;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 23px;
+        color: #ffeecf;
+    }
+
 	p {
         font-family: Raleway;
         font-weight: bold;
         font-size: 15px;
         line-height: 18px;
-        color: #FFFFFF;
+        color: #ffeecf;
         width: 227px;
         height: 18px;
         text-align: center;
         margin: 36px auto 192px auto;
 	}
-    button{
-        width: 155px;
-        height: 114px;
-        background: #A328D6;
-        border-radius: 5px;
-        border-color: #A328D6;
-        font-family: Raleway;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 23px;
-        color: #FFFFFF;
-    }
 `;
 const TopStyled = styled.div`
     display: flex;
     justify-content: space-between;
     width: 326px;
     margin: 25px auto 22px auto;
-    color: #FFFFFF;
+    color: #ffeecf;
 `;
 
 const Title = styled.div`
@@ -139,7 +141,7 @@ const RiLogoutBoxRLineStyled = styled(RiLogoutBoxRLine)`
 const NoTransactions = styled.div`
     width: 326px;
     height: 446px;
-    background: #FFFFFF;
+    background: #ffeecf;
     border-radius: 5px;
     margin: 0 auto 13px auto;
 
@@ -156,7 +158,7 @@ const NoTransactions = styled.div`
 const ShowTransactions = styled.div`
     width: 326px;
     height: 446px;
-    background: #FFFFFF;
+    background: #ffeecf;
     border-radius: 5px;
     margin: 0 auto 13px auto;
     overflow-y: scroll;
@@ -165,7 +167,7 @@ const ShowTransactions = styled.div`
     width: 8px;
     }
     &::-webkit-scrollbar-track {
-    background: #FFFFFF;
+    background: #ffeecf;
     border-radius: 5px;
     }
     &::-webkit-scrollbar-thumb {
@@ -173,7 +175,7 @@ const ShowTransactions = styled.div`
     border-radius: 5px;
     }
     h1{
-        color: #C6C6C6;
+        color: #253C78;
         width: 60px;
     }
     h2{
@@ -200,7 +202,7 @@ const Options = styled.div `
     margin: 0 auto 16px auto;
     justify-content: space-between;
     display:flex;
-    color: #FFFFFF;
+    color: #ffeecf;
     button{
         display: flex;
         flex-direction: column;

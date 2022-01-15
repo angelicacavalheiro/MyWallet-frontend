@@ -54,7 +54,7 @@ export default function Balance(){
 const ShowBalance = styled.section`
     padding-left: 10px;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: #ffeecf;
     margin: 10px auto 0 auto;
     display: flex;
     height: 24px;

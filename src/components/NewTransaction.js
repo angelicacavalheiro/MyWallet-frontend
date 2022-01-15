@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom";
 import { useState, useContext } from 'react';
 import UserContext from '.././contexts/UserContext';
@@ -31,7 +32,11 @@ export default function NewTransaction(){
 
         if(value <= 0){
             setLoading(false)
-            return alert("o valor precisa ser maior que zero")
+            return  Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O valor inserido precisa ser maior do que zero!'
+            })
         }
 
         const config = {
@@ -90,7 +95,7 @@ export default function NewTransaction(){
             />
 
             {(loading) ?
-            <button> <Loader type="ThreeDots" color="#FFFFFF" height={45} width={80} disabled={loading}/> </button>
+            <button> <Loader type="ThreeDots" color="#ffeecf" height={45} width={80} disabled={loading}/> </button>
              :
             <button onClick={requestTransaction}> Salvar {(transactionType === "input") ? "entrada" : "saída"} </button>}
         </form>
@@ -103,14 +108,14 @@ const Container = styled.div`
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    background: #8C11BE;
+    background: #D36582;
 
     p {
         font-family: Raleway;
         font-weight: bold;
         font-size: 15px;
         line-height: 18px;
-        color: #FFFFFF;
+        color: #ffeecf;
         width: 227px;
         height: 18px;
         text-align: center;
@@ -128,22 +133,22 @@ const Container = styled.div`
         line-height: 23px;
         color: #000000;
         opacity: ${props => props.disabled ? 0.7 : 1};
-        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+        background: ${props => props.disabled ? "#F2F2F2" : "#ffeecf"};
         pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
     button{
         width: 326px;
         height: 46px;
-        background: #A328D6;
+        background: #253C78;
         border-radius: 4.63636px;
-        border-color: #A328D6;
+        border-color: #253C78;
         margin: 0 auto 13px auto;
         padding: 11px auto 12px auto;
         font-family: Raleway;
         font-weight: bold;
         font-size: 20px;
         line-height: 23px;
-        color: #FFFFFF;
+        color: #ffeecf;
         opacity: ${props => props.disabled ? 0.7 : 1};
         pointer-events: ${props => props.disabled ? "none" : "visiblePainted"};
     }
@@ -159,8 +164,8 @@ const Title = styled.div`
     font-weight: bold;
     font-size: 26px;
     line-height: 31px;
-    color: #FFFFFF;
+    color: #ffeecf;
     width: 326px;
     margin: 25px auto 40px auto;
-    color: #FFFFFF;
+    color: #ffeecf;
 `;
